@@ -13,6 +13,7 @@ app.get('/clap.mp3', function (req, res) {
 
 io.sockets.on('connection', function (socket) {
   socket.on('clap', function (data) {
+	socket.broadcast.emit('clap');
 	socket.emit('clap');
   });
 });
