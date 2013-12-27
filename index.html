@@ -5,7 +5,7 @@
 <script>
 	var socket = io.connect();
 	socket.on('clap', function (data) {
-		new Audio("clap.mp3").play();
+		getAudio("clap").play();
 	});
 	var div = document.getElementById("member");
 	socket.on('member', function(member){
@@ -15,6 +15,22 @@
 		socket.emit("clap");
 	});
 
+	function getAudio(filename){
+		var audio;
+		try  {
+			audio = new Audio();
+			audio.removeAttribute("src");
+			["ogg", "mp3", "wav"].forEach(function (ext) {
+				var source = document.createElement("source");
+				source.src = filename + "." + ext;
+				source.type = "audio/" + ext;
+				audio.appendChild(source);
+			});
+		} catch (e) {
+			audio = { play: function () {} };
+		}
+		return audio;
+	}
 
 </script>
 

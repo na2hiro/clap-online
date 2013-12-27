@@ -7,8 +7,8 @@ server.listen(8080);
 app.get('/', function (req, res) {
   res.sendfile(__dirname + '/index.html');
 });
-app.get('/clap.mp3', function (req, res) {
-  res.sendfile(__dirname + '/clap.mp3');
+app.get('/clap.(mp3|ogg|wav)', function (req, res) {
+  res.sendfile(__dirname + '/clap.'+req.params[0]);
 });
 var member = 0;
 io.sockets.on('connection', function (socket) {
