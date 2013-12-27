@@ -1,0 +1,16 @@
+<body>
+</body>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+	var socket = io.connect('http://localhost');
+	socket.on('clap', function (data) {
+		new Audio("clap.mp3").play();
+		console.log("clap")
+	});
+	document.body.addEventListener("keydown", function(){
+		socket.emit("clap");
+	});
+
+
+</script>
+
